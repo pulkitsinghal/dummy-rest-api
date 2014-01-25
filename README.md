@@ -11,6 +11,9 @@ When using unit tests for the protected endpoint, the following exception occurs
     mvn clean compile
     mvn -Dtest=TestApiEndpoints test
     ...
+    1 > GET http://localhost:9998/dummy-rest-api/rest/dummy/protected/endpoint/
+    1 > Authorization: Basic dXNlcm5hbWU6cGFzc3dvcmQ=
+    ...
     Caused by: org.springframework.security.authentication.AuthenticationCredentialsNotFoundException: An Authentication object was not found in the SecurityContext
     	at org.springframework.security.access.intercept.AbstractSecurityInterceptor.credentialsNotFound(AbstractSecurityInterceptor.java:339)
         at org.springframework.security.access.intercept.AbstractSecurityInterceptor.beforeInvocation(AbstractSecurityInterceptor.java:198)
