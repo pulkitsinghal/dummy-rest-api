@@ -1,0 +1,38 @@
+<?xml  version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xmlns:mvc="http://www.springframework.org/schema/mvc"
+       xmlns:sec="http://www.springframework.org/schema/security"
+       xmlns:couchdb="http://www.ektorp.org/schema/couchdb"
+       xmlns:jaxws="http://cxf.apache.org/jaxws"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans-3.1.xsd
+                           http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-3.1.xsd
+                           http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-3.1.xsd
+                           http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-3.1.xsd
+                           http://www.ektorp.org/schema/couchdb http://www.ektorp.org/schema/couchdb/couchdb.xsd
+                           http://cxf.apache.org/jaxws http://cxf.apache.org/schemas/jaxws.xsd
+                           ">
+
+    <context:component-scan base-package="com.dummy" />
+
+    <!-- To allow public access by default and to set authentication mode to basic login/password -->
+    <sec:http>
+        <sec:anonymous enabled="true" />
+        <sec:http-basic />
+    </sec:http>
+
+    <!-- To delegate authorization to method calls rather than to urls -->
+    <!-- (Thus, we don't need to set any url-interceptor in this conf) -->
+    <sec:global-method-security pre-post-annotations="enabled" />
+
+    <!-- To create user/password with roles -->
+    <sec:authentication-manager>
+        <sec:authentication-provider>
+            <sec:user-service id="userService">
+                <sec:user name="username" password="password" authorities="dummy" />
+            </sec:user-service>
+        </sec:authentication-provider>
+    </sec:authentication-manager>
+
+</beans>
